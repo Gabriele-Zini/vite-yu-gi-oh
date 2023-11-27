@@ -9,4 +9,8 @@
 <style lang="scss">
 @use "../style/partials/_mixin"as*;
 @use "../style/partials/_variables"as*;
+
+header {
+    min-height: $header-height;
+}
 </style>

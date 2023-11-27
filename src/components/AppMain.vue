@@ -34,7 +34,7 @@ export default {
 
 @media screen and (min-width: 992px) {
     main {
-        border: 100px solid $primary-color;
+        border: $border-height solid $primary-color;
 
         .row {
             border-top: 50px solid white;
