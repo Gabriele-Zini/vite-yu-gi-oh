@@ -11,7 +11,7 @@ export default {
         <div v-for="image in monster.card_images" :key="image.id">
             <img :src="image.image_url" :alt="monster.name" class="w-100" />
         </div>
-        <div class="ms_bg-card text-center mb-3 p-1 pt-4">
+        <div class="ms_bg-card text-center mb-4 p-1 pt-4">
             <h3 class="fs-6 text-white">{{ monster.name }}</h3>
             <p>{{ monster.type }}</p>
             <p>{{ monster.archetype }}</p>
@@ -25,6 +25,6 @@ export default {
 
 .ms_bg-card {
     background-color: $primary-color;
-    min-height: 150px;
+    min-height: 200px;
 }
 </style>

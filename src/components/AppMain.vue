@@ -37,7 +37,10 @@ export default {
         border: 100px solid $primary-color;
 
         .row {
-            border: 50px solid white;
+            border-top: 50px solid white;
+            border-left: calc(50px - 12px) solid white;
+            border-right: calc(50px - 12px) solid white;
+            border-bottom: calc(50px - 24px) solid white;
         }
 
         .ms_col-5 {
