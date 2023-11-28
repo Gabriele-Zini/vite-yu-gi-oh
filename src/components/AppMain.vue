@@ -10,7 +10,7 @@ export default {
             itemsPerPage: 25,
             currentPage: 1,
             filteredTotalItems: 0,
-            selectedArchetype: null,
+            selectedArchetype: '',
         };
     },
     computed: {
@@ -34,7 +34,7 @@ export default {
         },
         headerInfo() {
             const totalCardsText = `TOTAL CARDS: ${this.filteredTotalItems}`;
-            const archetypeText = this.selectedArchetype === undefined || this.selectedArchetype === null ? `ARCHETYPE: All archetypes` : `ARCHETYPE: ${this.selectedArchetype}`;
+            const archetypeText = this.selectedArchetype === '' || this.selectedArchetype === undefined ? `ARCHETYPE: All archetypes` : `ARCHETYPE: ${this.selectedArchetype}`;
 
             return `${totalCardsText} - ${archetypeText}`;
         },
