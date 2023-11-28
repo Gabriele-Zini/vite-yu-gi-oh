@@ -10,6 +10,7 @@ export default {
             itemsPerPage: 25,
             currentPage: 1,
             filteredTotalItems: 0,
+            selectedArchetype: null,
         };
     },
     computed: {
@@ -33,9 +34,9 @@ export default {
         },
         headerInfo() {
             const totalCardsText = `TOTAL CARDS: ${this.filteredTotalItems}`;
-            const archetypeText = this.selectedArchetype === undefined ? `ARCHETYPE: All archetypes` : `ARCHETYPE: ${this.selectedArchetype}`;
+            const archetypeText = this.selectedArchetype === undefined || this.selectedArchetype === null ? `ARCHETYPE: All archetypes` : `ARCHETYPE: ${this.selectedArchetype}`;
 
-            return `${totalCardsText} ${archetypeText}`;
+            return `${totalCardsText} - ${archetypeText}`;
         },
     },
     methods: {
@@ -54,10 +55,6 @@ export default {
             this.currentPage = 1;
         },
 
-        handleFilterClick() {
-            this.currentPage += 1;
-            this.currentPage = 1;
-        },
     },
     components: {
         AppCard,
@@ -70,7 +67,7 @@ export default {
 <template>
     <main class="py-5">
         <div class="container">
-            <AppSelect @selected-archetype-change="handleSelectedArchetypeChange" @handleFilterClick="handleFilterClick" />
+            <AppSelect @selected-archetype-change="handleSelectedArchetypeChange"/>
             <div class="row d-flex">
                 <div class="bg-black text-white py-3" id="ms_row-header">{{ headerInfo }}
                 </div>

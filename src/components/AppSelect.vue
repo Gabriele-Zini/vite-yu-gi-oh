@@ -19,9 +19,7 @@ export default {
         emitSelectedArchetype() {
             this.$emit('selected-archetype-change', this.selectedArchetype);
         },
-        handleFilterClick() {
-            this.$emit('handleFilterClick')
-        }
+        
     }
 }
 </script>
@@ -34,7 +32,6 @@ export default {
                 {{ archetype.archetype }}
             </option>
         </select>
-        <button class="btn btn-secondary ms-3" @click="handleFilterClick">Filter</button>
     </div>
 </template>
 
