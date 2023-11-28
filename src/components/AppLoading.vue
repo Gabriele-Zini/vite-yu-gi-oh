@@ -14,9 +14,11 @@ export default {
     </main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "../style/partials/_mixin" as*;
 @use "../style/partials/_variables" as*;
+
+
 
 main {
     border: $border-height solid $primary-color;
