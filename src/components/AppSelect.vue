@@ -12,7 +12,7 @@ export default {
         selectedOptions() {
             return this.store.characters.data.filter((currentArchetype, index, array) =>
                 index === array.findIndex(archetype => archetype.archetype === currentArchetype.archetype)
-            );
+            ).sort((a, b) => (a.archetype && b.archetype) ? a.archetype.localeCompare(b.archetype) : 0);
         },
     },
     methods: {
