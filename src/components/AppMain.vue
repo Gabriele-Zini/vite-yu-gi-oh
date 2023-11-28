@@ -9,6 +9,7 @@ export default {
             store,
             itemsPerPage: 25,
             currentPage: 1,
+            filteredTotalItems: 0,
         };
     },
     computed: {
@@ -16,12 +17,19 @@ export default {
             return this.store.characters.data.length;
         },
         totalPages() {
-            return Math.ceil(this.totalItems / this.itemsPerPage);
+            return Math.ceil(this.filteredTotalItems / this.itemsPerPage);
         },
         paginatedMonsters() {
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
-            return this.store.characters.data.slice(startIndex, endIndex);
+            if (this.selectedArchetype) {
+                const filteredMonsters = this.store.characters.data.filter(monster => monster.archetype === this.selectedArchetype);
+                this.filteredTotalItems = filteredMonsters.length;
+                return filteredMonsters.slice(startIndex, endIndex);
+            } else {
+                this.filteredTotalItems = this.totalItems;
+                return this.store.characters.data.slice(startIndex, endIndex);
+            }
         },
     },
     methods: {
@@ -35,6 +43,15 @@ export default {
                 this.currentPage += 1;
             }
         },
+        handleSelectedArchetypeChange(newArchetype) {
+            this.selectedArchetype = newArchetype;
+            this.currentPage = 1;
+        },
+
+        handleFilterClick() {
+            this.currentPage += 1;
+            this.currentPage = 1;
+        },
     },
     components: {
         AppCard,
@@ -43,20 +60,23 @@ export default {
 };
 </script>
 
+
 <template>
     <main class="py-5">
         <div class="container">
-            <AppSelect />
+            <AppSelect @selected-archetype-change="handleSelectedArchetypeChange" @handleFilterClick="handleFilterClick" />
             <div class="row d-flex">
-                <div class="bg-black text-white py-3" id="ms_row-header">row header </div>
+                <div class="bg-black text-white py-3" id="ms_row-header">TOTAL CARDS: {{ filteredTotalItems }}
+                    <span class="ms-3">ARCHETYPE: {{ this.selectedArchetype === '' ? "All archetypes" : this.selectedArchetype }}</span>
+                </div>
                 <div class="col-12 col-md-6 ms_col-5" v-for="monster in paginatedMonsters" :key="monster.id">
                     <AppCard :monster="monster" :key="monster.id" />
                 </div>
-            <div class=" d-flex justify-content-center align-items-center pb-4">
-                <button class="btn btn-secondary" @click="prevPage" :disabled="currentPage === 1">Prev</button>
-                <span class="mx-3">Page {{ currentPage }} of {{ totalPages }}</span>
-                <button class="btn btn-secondary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
-            </div>
+                <div class=" d-flex justify-content-center align-items-center pb-4">
+                    <button class="btn btn-secondary" @click="prevPage" :disabled="currentPage === 1">Prev</button>
+                    <span class="mx-3">Page {{ currentPage }} of {{ totalPages }}</span>
+                    <button class="btn btn-secondary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+                </div>
             </div>
         </div>
     </main>
