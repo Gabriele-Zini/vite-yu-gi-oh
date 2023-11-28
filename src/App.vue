@@ -16,14 +16,21 @@ export default {
         AppLoading,
     },
     created() {
-        this.store.loading = true
-        console.log(this.store.loading)
-        axios.get(this.store.apiUrl).then((resp) => {
-            this.store.characters = resp.data;
-        }).finally(() => {
-            this.store.loading = false
+        this.getCharacters()
+    },
+    methods: {
+        getCharacters() {
+            const offset = 0;
+            this.store.loading = true
             console.log(this.store.loading)
-        })
+            axios.get(this.store.apiUrl).then((resp) => {
+                const num = resp.data.length;
+                this.store.characters = resp.data;
+            }).finally(() => {
+                this.store.loading = false
+                console.log(this.store.loading)
+            })
+        }
     }
 }
 </script>
@@ -31,7 +38,7 @@ export default {
 <template>
     <AppHeader />
     <AppLoading v-if="store.loading" />
-    <AppMain v-else/>
+    <AppMain v-else />
 </template>
 
 <style lang="scss">

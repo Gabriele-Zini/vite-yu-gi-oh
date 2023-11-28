@@ -21,7 +21,11 @@ export default {
 
 
 main {
-    border: $border-height solid $primary-color;
+
+    @media screen and (min-width:992px) {
+       
+    }
+
 
     .ms_loading {
         height: calc(100vh - 280px);
@@ -39,7 +43,7 @@ main {
             height: 40px;
             animation: spin 1s linear infinite;
             display: inline-block;
-           
+
         }
 
         @keyframes spin {

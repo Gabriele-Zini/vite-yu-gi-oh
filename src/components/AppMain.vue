@@ -1,6 +1,7 @@
 <script>
 import { store } from '../store';
 import AppCard from './AppCard.vue';
+import AppSelect from './AppSelect.vue';
 
 export default {
     data() {
@@ -37,23 +38,25 @@ export default {
     },
     components: {
         AppCard,
+        AppSelect,
     },
 };
 </script>
 
 <template>
-    <main>
+    <main class="py-5">
         <div class="container">
+            <AppSelect />
             <div class="row d-flex">
                 <div class="bg-black text-white py-3" id="ms_row-header">row header </div>
                 <div class="col-12 col-md-6 ms_col-5" v-for="monster in paginatedMonsters" :key="monster.id">
-                    <AppCard :monster="monster" />
+                    <AppCard :monster="monster" :key="monster.id" />
                 </div>
-            </div>
-            <div class="pagination-buttons d-flex justify-content-center align-items-center pb-4">
+            <div class=" d-flex justify-content-center align-items-center pb-4">
                 <button class="btn btn-secondary" @click="prevPage" :disabled="currentPage === 1">Prev</button>
                 <span class="mx-3">Page {{ currentPage }} of {{ totalPages }}</span>
                 <button class="btn btn-secondary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+            </div>
             </div>
         </div>
     </main>
@@ -67,12 +70,12 @@ export default {
 
 @media screen and (min-width: 992px) {
     main {
-        border: $border-height solid $primary-color;
+        background-color: $primary-color;
 
         .row {
-            border-top: 50px solid white;
-            border-left: calc(50px - 12px) solid white;
-            border-right: calc(50px - 12px) solid white;
+            background-color: white;
+            padding: 40px;
+            padding-bottom: 0;
         }
 
         .ms_col-5 {
