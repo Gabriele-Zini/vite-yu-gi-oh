@@ -31,6 +31,12 @@ export default {
                 return this.store.characters.data.slice(startIndex, endIndex);
             }
         },
+        headerInfo() {
+            const totalCardsText = `TOTAL CARDS: ${this.filteredTotalItems}`;
+            const archetypeText = this.selectedArchetype === undefined ? `ARCHETYPE: All archetypes` : `ARCHETYPE: ${this.selectedArchetype}`;
+
+            return `${totalCardsText} ${archetypeText}`;
+        },
     },
     methods: {
         prevPage() {
@@ -66,8 +72,7 @@ export default {
         <div class="container">
             <AppSelect @selected-archetype-change="handleSelectedArchetypeChange" @handleFilterClick="handleFilterClick" />
             <div class="row d-flex">
-                <div class="bg-black text-white py-3" id="ms_row-header">TOTAL CARDS: {{ filteredTotalItems }}
-                    <span class="ms-3">ARCHETYPE: {{ this.selectedArchetype === '' ? "All archetypes" : this.selectedArchetype }}</span>
+                <div class="bg-black text-white py-3" id="ms_row-header">{{ headerInfo }}
                 </div>
                 <div class="col-12 col-md-6 ms_col-5" v-for="monster in paginatedMonsters" :key="monster.id">
                     <AppCard :monster="monster" :key="monster.id" />

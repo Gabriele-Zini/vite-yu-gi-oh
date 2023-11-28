@@ -23,12 +23,13 @@ export default {
 main {
 
     @media screen and (min-width:992px) {
-       
+        border: $border-height solid $primary-color;
     }
 
 
     .ms_loading {
         height: calc(100vh - 280px);
+        background-color: white;
 
         .ms_text-color {
             color: $primary-color;
