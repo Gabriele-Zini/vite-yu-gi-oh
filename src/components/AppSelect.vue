@@ -26,7 +26,7 @@ export default {
 
 <template>
     <div class="mb-5">
-        <select name="select" id="select" v-model="selectedArchetype" @change="emitSelectedArchetype">
+        <select class="form-select w-25" name="select" id="select" v-model="selectedArchetype" @change="emitSelectedArchetype">
             <option value="">All Archetypes</option>
             <option v-for="archetype in selectedOptions" :key="archetype.archetype" :value="archetype.archetype">
                 {{ archetype.archetype }}
